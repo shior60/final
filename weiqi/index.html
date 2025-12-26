@@ -3,51 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1132916 - FinalTerm </title>
+    <title>1132916 - FinalTerm</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
     <div class="game-container">
         <h1>🎯 1132916 - FinalTerm</h1>
-        
         <div id="control-panel">
-            <div class="control-group">
-                <label>模式：</label>
-                <select id="game-mode" onchange="resetGame()">
-                    <option value="PvC">電腦對戰 (User vs AI)</option>
-                    <option value="PvP">雙人對戰 (User vs User)</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <label>讓子：</label>
-                <select id="handicap-select" onchange="resetGame()">
-                    <option value="0">無讓子</option>
-                    <option value="2">2 子</option>
-                    <option value="4">4 子</option>
-                    <option value="9">9 子</option>
-                </select>
-                <button onclick="resetGame()">重新開始</button>
-            </div>
+            <select id="game-mode" onchange="resetGame()">
+                <option value="PvC">電腦對戰</option>
+                <option value="PvP">雙人對戰</option>
+            </select>
+            <select id="handicap-select" onchange="resetGame()">
+                <option value="0">無讓子</option>
+                <option value="2">2子</option>
+                <option value="4">4子</option>
+                <option value="9">9子</option>
+            </select>
+            <button onclick="resetGame()">重新開始</button>
         </div>
-
         <div id="status-bar">
-            回合: <span id="player-indicator" class="current-player-indicator"></span>
+            回合: <span id="player-indicator" style="display:inline-block;width:15px;height:15px;border-radius:50%;border:1px solid #999;"></span>
             <span id="current-player-text">黑棋</span>
-            <button id="pass-btn" onclick="handlePass()" class="pass-btn">虛手讓子 (Pass)</button>
-            <span id="thinking-msg" style="display:none; color: #3498db;">(AI 思考中...)</span>
+            <button id="pass-btn" onclick="handlePass()">虛手讓子 (Pass)</button>
+            <span id="thinking-msg" style="display:none;color:#3498db;">(AI 思考中...)</span>
         </div>
 
         <div id="board-container">
-            <div id="board"></div>
-        </div>
+            <div id="grid-layer"></div> <div id="board"></div>      </div>
         
-        <div id="result-display"></div>
-        <div id="message-area"></div>
-        <div id="hint" style="display: none;">
-            💡 提示：若結算有誤，可直接點擊棋子手動修正死活。
-        </div>
+        <div id="result-display" style="margin-top:15px; font-weight:bold; background:white; color:black; padding:10px; border-radius:10px; display:none;"></div>
+        <div id="message-area" style="color:#f1c40f; font-weight:bold; height:20px; margin-top:5px;"></div>
+        <div id="hint" style="display:none; font-size:0.8em; color:#ccc; margin-top:10px;">💡 提示：可點擊棋子手動修正死活</div>
     </div>
 </body>
-
 </html>
