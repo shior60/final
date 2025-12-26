@@ -2,41 +2,55 @@ body { font-family: 'Microsoft JhengHei', sans-serif; display: flex; justify-con
 .game-container { text-align: center; background: rgba(0,0,0,0.8); padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
 h1 { color: #f39c12; margin-bottom: 15px; }
 
-/* 棋盤與格線設定 */
+/* 棋盤容器 */
 #board-container { 
     position: relative; 
-    background-color: #D2691E; /* 木質色 */
-    padding: 10px; 
+    background-color: #D2691E; 
+    padding: 25px; /* 增加邊距讓棋子在邊緣不會切到 */
     border: 4px solid #5e3a15; 
-    border-radius: 10px; 
-    width: 482px; /* 50px*9 + 4px*8間隙 */
-    height: 482px;
+    border-radius: 5px; 
+    width: 400px; /* 50px * 8格 */
+    height: 400px;
+    margin: 0 auto;
 }
 
-#grid-layer {
-    position: absolute; top: 10px; left: 10px;
-    display: grid; grid-template-columns: repeat(9, 50px); grid-template-rows: repeat(9, 50px); gap: 4px;
-    z-index: 1; pointer-events: none;
+/* 網格線層：繪製 8x8 個方格，產生 9x9 條線 */
+#grid-lines-layer {
+    position: absolute;
+    top: 25px; left: 25px;
+    display: grid;
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
+    z-index: 1;
+    pointer-events: none;
 }
-.grid-line { border: 1px solid rgba(0,0,0,0.5); box-sizing: border-box; } /* 黑色格線 */
+.grid-line-cell {
+    width: 50px; height: 50px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
 
+/* 落子感應層：9x9 個點，剛好對準線條交叉處 */
 #board { 
-    position: absolute; top: 10px; left: 10px;
-    display: grid; grid-template-columns: repeat(9, 50px); grid-template-rows: repeat(9, 50px); gap: 4px;
+    position: absolute;
+    top: 0; left: 0;
+    display: grid; 
+    grid-template-columns: repeat(9, 50px); 
+    grid-template-rows: repeat(9, 50px); 
     z-index: 2; 
 }
-
 .cell { width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; cursor: pointer; }
 
-/* 您的原始棋子與標記樣式 */
-.stone { width: 44px; height: 44px; border-radius: 50%; box-shadow: 2px 4px 8px rgba(0,0,0,0.5); transition: transform 0.3s, opacity 0.3s; }
+/* 棋子樣式（維持不變） */
+.stone { width: 44px; height: 44px; border-radius: 50%; box-shadow: 2px 4px 8px rgba(0,0,0,0.5); transition: transform 0.3s, opacity 0.3s; z-index: 10; }
 .stone.black { background: radial-gradient(circle at 30% 30%, #444, #000); }
 .stone.white { background: radial-gradient(circle at 30% 30%, #fff, #ddd); border: 1px solid #999; }
 .captured { transform: scale(0); opacity: 0; }
-.territory-marker { width: 14px; height: 14px; border-radius: 50%; opacity: 0.7; }
+.territory-marker { width: 14px; height: 14px; border-radius: 50%; opacity: 0.8; z-index: 5; }
 .territory-black { background-color: #000; }
-.territory-white { background-color: #fff; }
+.territory-white { background-color: #fff; border: 1px solid #000; }
 .atari-warn { animation: pulse 0.8s infinite alternate; border: 2px solid #ff4d4f !important; }
 @keyframes pulse { from { box-shadow: 0 0 5px #f00; } to { box-shadow: 0 0 15px #f00; } }
 
 button, select { padding: 8px 15px; border-radius: 20px; border: none; cursor: pointer; font-weight: bold; background: #3498db; color: white; }
+#pass-btn { background: #f39c12; }
