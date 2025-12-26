@@ -18,7 +18,6 @@
             <select id="handicap-select" onchange="resetGame()">
                 <option value="0">無讓子</option>
                 <option value="2">2子</option>
-                <option value="4">4子</option>
                 <option value="9">9子</option>
             </select>
             <button onclick="resetGame()">重新開始</button>
@@ -26,12 +25,14 @@
         <div id="status-bar">
             回合: <span id="player-indicator" style="display:inline-block;width:15px;height:15px;border-radius:50%;border:1px solid #999;"></span>
             <span id="current-player-text">黑棋</span>
-            <button id="pass-btn" onclick="handlePass()">虛手讓子 (Pass)</button>
+            <button id="pass-btn" onclick="handlePass()">讓子 (Pass)</button>
             <span id="thinking-msg" style="display:none;color:#3498db;">(AI 思考中...)</span>
         </div>
 
         <div id="board-container">
-            <div id="grid-layer"></div> <div id="board"></div>      </div>
+            <div id="grid-lines-layer"></div>
+            <div id="board"></div>
+        </div>
         
         <div id="result-display" style="margin-top:15px; font-weight:bold; background:white; color:black; padding:10px; border-radius:10px; display:none;"></div>
         <div id="message-area" style="color:#f1c40f; font-weight:bold; height:20px; margin-top:5px;"></div>
