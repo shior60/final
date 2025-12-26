@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1132916 - FinalTerm</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🎯 1132916 - FinalTerm</h1>
+        
+        <div id="control-panel">
+            <div class="control-group">
+                <label>模式：</label>
+                <select id="game-mode" onchange="resetGame()">
+                    <option value="PvC">電腦對戰 (User vs AI)</option>
+                    <option value="PvP">雙人對戰 (User vs User)</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>讓子：</label>
+                <select id="handicap-select" onchange="resetGame()">
+                    <option value="0">無讓子</option>
+                    <option value="2">2 子</option>
+                    <option value="4">4 子</option>
+                    <option value="9">9 子</option>
+                </select>
+                <button onclick="resetGame()">重新開始</button>
+            </div>
+        </div>
+
+        <div id="status-bar">
+            回合: <span id="player-indicator" class="current-player-indicator"></span>
+            <span id="current-player-text">黑棋</span>
+            <button id="pass-btn" onclick="handlePass()" class="pass-btn">虛手讓子 (Pass)</button>
+            <span id="thinking-msg" style="display:none; color: #3498db;">(AI 思考中...)</span>
+        </div>
+
+        <div id="board-container">
+            <div id="board-grid-lines"></div> <div id="board"></div> </div>
+        
+        <div id="result-display"></div>
+        <div id="message-area"></div>
+        <div id="hint" style="font-size: 0.85em; color: #eee; margin-top: 10px; display: none; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
+            💡 提示：若結算有誤，可直接「點擊棋子」手動標記死活，分數將自動更新。
+        </div>
+    </div>
+</body>
+</html>
